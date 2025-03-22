@@ -1,19 +1,13 @@
 'use client'
 
-import { doGetCharacters } from '@/services'
+import { doGetPlanets } from '@/services'
 import { useEffect } from 'react'
 
 export default function Home() {
   useEffect(() => {
-    doGetCharacters()
-      .then((response) => {
-        console.log(response)
-      })
-      .then(() => {
-        doGetCharacters({ page: 2 }).then((response) => {
-          console.log(response)
-        })
-      })
+    doGetPlanets().then((response) => {
+      console.log('responde', response)
+    })
   }, [])
 
   return <h1>Teste</h1>

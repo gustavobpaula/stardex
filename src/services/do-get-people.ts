@@ -1,5 +1,5 @@
-import { People, Planet } from '@/entities'
-import { Characters } from '@/models'
+import { People as PeopleAPI, Planet as PlanetAPI } from '@/entities'
+import { Characters as CharactersUI } from '@/models'
 import { request } from './core/request'
 import { mapCharacters } from '@/mappers'
 
@@ -16,18 +16,20 @@ type DoGetCharacters = {
  * 3. Maps the fetched data to the application's character model using the `mapCharacters` function.
  *
  * @param {DoGetCharacters} [params={ page: 1 }] - The parameters for fetching characters, including the page number.
- * @returns {Promise<Characters>} A promise that resolves to the mapped character data.
+ * @returns {Promise<CharactersUI>} A promise that resolves to the mapped character data.
  * @throws {Error} Throws an error if the fetch operation fails.
  */
-export async function doGetCharacters(params: DoGetCharacters = { page: 1 }): Promise<Characters> {
+export async function doGetCharacters(
+  params: DoGetCharacters = { page: 1 },
+): Promise<CharactersUI> {
   const { page } = params
-  const res = await request<People>({
+  const res = await request<PeopleAPI>({
     url: `https://swapi.dev/api/people?page=${page}`,
   })
 
   const planets = await Promise.all(
     res.results.map((person) =>
-      request<Planet>({ url: person.homeworld }).catch(() => ({}) as Planet),
+      request<PlanetAPI>({ url: person.homeworld }).catch(() => ({}) as PlanetAPI),
     ),
   )
 
