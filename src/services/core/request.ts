@@ -1,8 +1,9 @@
 type ApiRequestOptions = {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD';
-  url: string;
-  headers?: Record<string, string>;
-  data?: Record<string, any>;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD'
+  url: string
+  headers?: Record<string, string>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data?: Record<string, any>
 }
 
 /**
@@ -20,17 +21,17 @@ type ApiRequestOptions = {
  */
 export const request = async <T>(options: ApiRequestOptions): Promise<T> => {
   const res = await fetch(options.url, {
-	method: options.method || 'GET',
-	headers: {
-	  'Content-Type': 'application/json',
-	  ...options.headers,
-	},
-	body: options.data ? JSON.stringify(options.data) : undefined,
-  });
+    method: options.method || 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    body: options.data ? JSON.stringify(options.data) : undefined,
+  })
 
   if (!res.ok) {
-	throw new Error('Failed to fetch');
+    throw new Error('Failed to fetch')
   }
 
-  return res.json();
+  return res.json()
 }

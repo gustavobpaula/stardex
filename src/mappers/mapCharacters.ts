@@ -1,5 +1,5 @@
-import { People as PeopleAPI, Planets as PlanetsAPI } from "@/entities";
-import { Characters as CharactersUI } from "@/models";
+import { People as PeopleAPI, Planet as PlanetAPI } from '@/entities'
+import { Characters as CharactersUI } from '@/models'
 
 /**
  * Maps the API data for people and planets to the application's character model.
@@ -12,25 +12,22 @@ import { Characters as CharactersUI } from "@/models";
  * @param {PlanetsAPI[]} planetsAPI - The API data for planets.
  * @returns {CharactersUI} The mapped character data.
  */
-export function mapCharacters(
-  peopleAPI: PeopleAPI,
-  planetsAPI: PlanetsAPI[]
-): CharactersUI {
+export function mapCharacters(peopleAPI: PeopleAPI, planetsAPI: PlanetAPI[]): CharactersUI {
   return {
-    nextPage: peopleAPI.next || "",
-    previousPage: peopleAPI.previous || "",
+    nextPage: peopleAPI.next || '',
+    previousPage: peopleAPI.previous || '',
     characters: peopleAPI.results.map((apiCharacter, index) => {
       const homeworld = {
-        name: planetsAPI[index]?.name || "Unknown",
-        url: planetsAPI[index]?.url || "",
-      };
+        name: planetsAPI[index]?.name || 'Unknown',
+        url: planetsAPI[index]?.url || '',
+      }
 
       return {
-        name: apiCharacter.name || "Unknown",
-		birthYear: apiCharacter.birth_year || "Unknown",
-        height: apiCharacter.height || "Unknown",
+        name: apiCharacter.name || 'Unknown',
+        birthYear: apiCharacter.birth_year || 'Unknown',
+        height: apiCharacter.height || 'Unknown',
         homeworld,
-      };
+      }
     }),
-  };
+  }
 }

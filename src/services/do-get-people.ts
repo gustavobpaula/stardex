@@ -1,11 +1,10 @@
-import { People, Planets } from "@/entities";
-import { Characters } from "@/models";
-import { request } from "./core/request";
-import { mapCharacters } from "@/mappers";
-
+import { People, Planet } from '@/entities'
+import { Characters } from '@/models'
+import { request } from './core/request'
+import { mapCharacters } from '@/mappers'
 
 type DoGetCharacters = {
-  page?: number;
+  page?: number
 }
 
 /**
@@ -21,18 +20,16 @@ type DoGetCharacters = {
  * @throws {Error} Throws an error if the fetch operation fails.
  */
 export async function doGetCharacters(params: DoGetCharacters = { page: 1 }): Promise<Characters> {
-  const { page } = params;
+  const { page } = params
   const res = await request<People>({
     url: `https://swapi.dev/api/people?page=${page}`,
-  });
+  })
 
   const planets = await Promise.all(
     res.results.map((person) =>
-      request<Planets>({ url: person.homeworld }).catch(
-        () => ({} as Planets)
-      )
-    )
-  );
+      request<Planet>({ url: person.homeworld }).catch(() => ({}) as Planet),
+    ),
+  )
 
-  return mapCharacters(res, planets);
+  return mapCharacters(res, planets)
 }
