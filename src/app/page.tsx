@@ -1,11 +1,11 @@
 'use client'
 
-import { doGetPlanets } from '@/services'
+import { doGetCharacters } from '@/services'
 import { useEffect } from 'react'
 
 export default function Home() {
   useEffect(() => {
-    doGetPlanets().then((response) => {
+    doGetCharacters({ search: 'skywalker' }).then((response) => {
       console.log('responde', response)
     })
   }, [])

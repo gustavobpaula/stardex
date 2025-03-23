@@ -1,2 +1,2 @@
-export * from './do-get-people'
+export * from './do-get-characters'
 export * from './do-get-planets'

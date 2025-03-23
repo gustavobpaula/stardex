@@ -5,6 +5,7 @@ import { mapPlanets } from '@/mappers'
 
 type DoGetPlanets = {
   page?: number
+  search?: string
 }
 
 /**
@@ -16,14 +17,14 @@ type DoGetPlanets = {
  * 3. Fetches the resident information for each planet in the list.
  * 4. Maps the fetched data to the application's planet model using the `mapPlanets` function.
  *
- * @param {DoGetPlanets} [params={ page: 1 }] - The parameters for fetching planets, including the page number.
+ * @param {DoGetPlanets} [params={ page: 1 }] - The parameters for fetching planets, including the page number and search query.
  * @returns {Promise<PlanetsUI>} A promise that resolves to the mapped planet data.
  * @throws {Error} Throws an error if the fetch operation fails.
  */
 export async function doGetPlanets(params: DoGetPlanets = { page: 1 }): Promise<PlanetsUI> {
-  const { page } = params
   const res = await request<PlanetsAPI>({
-    url: `https://swapi.dev/api/planets?page=${page}`,
+    url: `https://swapi.dev/api/planets`,
+    query: params,
   })
 
   const externalInfosPromise = res.results.map(async (planet) => {

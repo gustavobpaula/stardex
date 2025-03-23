@@ -5,7 +5,7 @@ export interface Film {
   director: string
   producer: string
   release_date: string
-  especies: string[]
+  species: string[]
   starships: string[]
   vehicles: string[]
   characters: string[]

@@ -17,7 +17,7 @@ export interface Planet {
 
 export interface Planets {
   count: number
-  next: string
-  previous: string
+  next: string | null
+  previous: string | null
   results: Planet[]
 }
