@@ -1,13 +1,11 @@
 'use client'
 
-import { doGetCharacters } from '@/services'
+import { doGetCharacter } from '@/services'
 import { useEffect } from 'react'
 
 export default function Home() {
   useEffect(() => {
-    doGetCharacters({ search: 'skywalker' }).then((response) => {
-      console.log('responde', response)
-    })
+    doGetCharacter({ url: 'https://swapi.dev/api/people/1/' })
   }, [])
 
   return <h1>Teste</h1>

@@ -3,7 +3,7 @@ import { Characters as CharactersUI } from '@/models'
 import { request } from './core/request'
 import { mapCharacters } from '@/mappers'
 
-type DoGetCharacters = {
+type DoGetCharactersProps = {
   page?: number
   search?: string
 }
@@ -16,11 +16,11 @@ type DoGetCharacters = {
  * 2. Fetches the homeworld information for each person in the list.
  * 3. Maps the fetched data to the application's character model using the `mapCharacters` function.
  *
- * @param {DoGetCharacters} [params] - The parameters for fetching characters, including the page number and search query.
+ * @param {DoGetCharactersProps} [params] - The parameters for fetching characters, including the page number and search query.
  * @returns {Promise<CharactersUI>} A promise that resolves to the mapped character data.
  * @throws {Error} Throws an error if the fetch operation fails.
  */
-export async function doGetCharacters(params: DoGetCharacters): Promise<CharactersUI> {
+export async function doGetCharacters(params: DoGetCharactersProps): Promise<CharactersUI> {
   const res = await request<PeopleAPI>({
     url: `https://swapi.dev/api/people`,
     query: params,
