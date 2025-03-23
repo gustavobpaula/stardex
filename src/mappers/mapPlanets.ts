@@ -1,10 +1,9 @@
-import { Planets as PlanetsAPI, Film as FilmAPI, Person as PersonAPI } from '@/entities'
+import { Planets as PlanetsAPI, Person as PersonAPI } from '@/entities'
 import { Planets as PlanetsUI } from '@/models'
 
 type MapPlanetsProps = {
   planets: PlanetsAPI
   externalInfos: Array<{
-    films: FilmAPI[]
     residents: PersonAPI[]
   }>
 }
@@ -18,7 +17,7 @@ type MapPlanetsProps = {
  *
  * @param {MapPlanetsProps} props - The properties containing the API data for planets and their external information.
  * @param {PlanetsAPI} props.planets - The API data for planets.
- * @param {Array<{ films: FilmAPI[], residents: PersonAPI[] }>} props.externalInfos - The external information for each planet, including films and residents.
+ * @param {Array<{ residents: PersonAPI[] }>} props.externalInfos - The external information for each planet, including residents.
  * @returns {PlanetsUI} The mapped planet data.
  */
 export function mapPlanets({ planets, externalInfos }: MapPlanetsProps): PlanetsUI {

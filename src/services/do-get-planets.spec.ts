@@ -1,5 +1,5 @@
 import { doGetPlanets } from './do-get-planets'
-import { Planets as PlanetsAPI, Film as FilmAPI, Person as PersonAPI } from '@/entities'
+import { Planets as PlanetsAPI, Person as PersonAPI } from '@/entities'
 import { request } from './core/request'
 
 jest.mock('./core/request')
@@ -29,23 +29,6 @@ describe('doGetPlanets', () => {
     ],
   }
 
-  const mockFilmAPI: FilmAPI = {
-    title: 'A New Hope',
-    episode_id: 4,
-    opening_crawl: 'It is a period of civil war...',
-    director: 'George Lucas',
-    producer: 'Gary Kurtz, Rick McCallum',
-    release_date: '1977-05-25',
-    characters: ['https://swapi.dev/api/people/1/'],
-    planets: ['https://swapi.dev/api/planets/1/'],
-    starships: ['https://swapi.dev/api/starships/2/'],
-    vehicles: ['https://swapi.dev/api/vehicles/4/'],
-    species: ['https://swapi.dev/api/species/1/'],
-    created: '2014-12-10T14:23:31.880000Z',
-    edited: '2014-12-20T19:49:45.256000Z',
-    url: 'https://swapi.dev/api/films/1/',
-  }
-
   const mockPersonAPI: PersonAPI = {
     name: 'Luke Skywalker',
     height: '172',
@@ -72,7 +55,6 @@ describe('doGetPlanets', () => {
   it('should fetch planets and map them correctly', async () => {
     ;(request as jest.Mock).mockImplementation(({ url }) => {
       if (url.includes('/planets')) return Promise.resolve(mockPlanetsAPI)
-      if (url.includes('/films')) return Promise.resolve(mockFilmAPI)
       if (url.includes('/people/1')) return Promise.resolve(mockPersonAPI)
       if (url.includes('/people/2')) return Promise.resolve(mockPersonAPI)
 
@@ -109,7 +91,6 @@ describe('doGetPlanets', () => {
   it('should handle search parameter correctly', async () => {
     ;(request as jest.Mock).mockImplementation(({ url }) => {
       if (url.includes('/planets')) return Promise.resolve(mockPlanetsAPI)
-      if (url.includes('/films')) return Promise.resolve(mockFilmAPI)
       if (url.includes('/people/1')) return Promise.resolve(mockPersonAPI)
       if (url.includes('/people/2')) return Promise.resolve(mockPersonAPI)
 

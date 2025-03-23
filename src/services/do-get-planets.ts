@@ -1,4 +1,4 @@
-import { Planets as PlanetsAPI, Film as FilmAPI, Person as PersonAPI } from '@/entities'
+import { Planets as PlanetsAPI, Person as PersonAPI } from '@/entities'
 import { Planets as PlanetsUI } from '@/models'
 import { request } from './core/request'
 import { mapPlanets } from '@/mappers'
@@ -28,17 +28,13 @@ export async function doGetPlanets(params: DoGetPlanetsProps = { page: 1 }): Pro
   })
 
   const externalInfosPromise = res.results.map(async (planet) => {
-    const films = await Promise.all(
-      planet.films.map((film) => request<FilmAPI>({ url: film }).catch(() => ({}) as FilmAPI)),
-    )
-
     const residents = await Promise.all(
       planet.residents.map((resident) =>
         request<PersonAPI>({ url: resident }).catch(() => ({}) as PersonAPI),
       ),
     )
 
-    return { films, residents }
+    return { residents }
   })
 
   const externalInfos = await Promise.all(externalInfosPromise)

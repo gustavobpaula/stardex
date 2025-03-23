@@ -10,8 +10,6 @@ export interface Planet {
   population: string
   residents: Array<{ name: string; url: string }>
   films: Array<string>
-  created: string
-  edited: string
   url: string
 }
 
