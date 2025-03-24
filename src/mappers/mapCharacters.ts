@@ -1,5 +1,6 @@
 import { People as PeopleAPI, Planet as PlanetAPI } from '@/entities'
 import { Characters as CharactersUI } from '@/models'
+import { extractPageFromUrl } from '@/utils'
 
 /**
  * Maps the API data for people and planets to the application's character model.
@@ -15,8 +16,8 @@ import { Characters as CharactersUI } from '@/models'
 export function mapCharacters(peopleAPI: PeopleAPI, planetsAPI: PlanetAPI[]): CharactersUI {
   return {
     total: peopleAPI.count || 0,
-    nextPage: peopleAPI.next || '',
-    previousPage: peopleAPI.previous || '',
+    nextPage: peopleAPI.next ? extractPageFromUrl(peopleAPI.next) : null,
+    previousPage: peopleAPI.previous ? extractPageFromUrl(peopleAPI.previous) : null,
     characters: peopleAPI.results.map((apiCharacter, index) => {
       const homeworld = {
         name: planetsAPI[index]?.name || 'Unknown',

@@ -20,7 +20,7 @@ export interface Character {
 
 export interface Characters {
   total: number
-  nextPage: string
-  previousPage: string
+  nextPage: number | null
+  previousPage: number | null
   characters: Array<Pick<Character, 'name' | 'height' | 'birthYear' | 'homeworld' | 'url'>>
 }

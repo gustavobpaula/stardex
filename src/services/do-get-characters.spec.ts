@@ -61,8 +61,8 @@ describe('doGetCharacters', () => {
 
     expect(result).toEqual({
       total: 1,
-      nextPage: '',
-      previousPage: '',
+      nextPage: null,
+      previousPage: null,
       characters: [
         {
           name: 'Luke Skywalker',
@@ -92,8 +92,8 @@ describe('doGetCharacters', () => {
 
     expect(result).toEqual({
       total: 1,
-      nextPage: '',
-      previousPage: '',
+      nextPage: null,
+      previousPage: null,
       characters: [
         {
           name: 'Luke Skywalker',
