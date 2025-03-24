@@ -14,7 +14,7 @@ export interface Planet {
 }
 
 export interface Planets {
-  qtdItens: number
+  total: number
   nextPage: string
   previousPage: string
   planets: Array<

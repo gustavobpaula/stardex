@@ -1,21 +1,19 @@
 'use client'
 
 import { CardLoading, CardCharacter } from '@/components'
-import { Characters } from '@/models'
-import { doGetCharacters } from '@/services'
-import { useEffect, useState } from 'react'
+import { useCharactersStore } from '@/store'
+import { useEffect } from 'react'
 
-export default function Home() {
+export default function Characters() {
   const array = new Array(10).fill(0)
-  const [characters, setCharacters] = useState<Characters>()
-  const [isLoading, setIsLoading] = useState(false)
+
+  const loadCharacters = useCharactersStore((state) => state.loadCharacters)
+  const isLoading = useCharactersStore((state) => state.isLoading)
+  const characters = useCharactersStore((state) => state.characters)
 
   useEffect(() => {
-    setIsLoading(true)
-    doGetCharacters({})
-      .then(setCharacters)
-      .finally(() => setIsLoading(false))
-  }, [])
+    loadCharacters()
+  }, [loadCharacters])
 
   if (isLoading) {
     return (
@@ -29,7 +27,9 @@ export default function Home() {
 
   return (
     <main className="grid grid-cols-1 gap-4 p-4 align-middle sm:grid-cols-2 lg:grid-cols-4">
-      {characters?.characters.map((props, index) => <CardCharacter key={index} {...props} />)}
+      {characters.map((props, index) => (
+        <CardCharacter key={index} {...props} />
+      ))}
     </main>
   )
 }

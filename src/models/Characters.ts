@@ -19,6 +19,7 @@ export interface Character {
 }
 
 export interface Characters {
+  total: number
   nextPage: string
   previousPage: string
   characters: Array<Pick<Character, 'name' | 'height' | 'birthYear' | 'homeworld' | 'url'>>

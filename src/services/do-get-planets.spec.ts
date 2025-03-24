@@ -64,7 +64,7 @@ describe('doGetPlanets', () => {
     const result = await doGetPlanets({ page: 1 })
 
     expect(result).toEqual({
-      qtdItens: 1,
+      total: 1,
       nextPage: '',
       previousPage: '',
       planets: [
@@ -104,7 +104,7 @@ describe('doGetPlanets', () => {
     })
 
     expect(result).toEqual({
-      qtdItens: 1,
+      total: 1,
       nextPage: '',
       previousPage: '',
       planets: [

@@ -60,6 +60,7 @@ describe('doGetCharacters', () => {
     const result = await doGetCharacters({ page: 1 })
 
     expect(result).toEqual({
+      total: 1,
       nextPage: '',
       previousPage: '',
       characters: [
@@ -90,6 +91,7 @@ describe('doGetCharacters', () => {
     })
 
     expect(result).toEqual({
+      total: 1,
       nextPage: '',
       previousPage: '',
       characters: [

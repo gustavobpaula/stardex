@@ -22,7 +22,7 @@ type MapPlanetsProps = {
  */
 export function mapPlanets({ planets, externalInfos }: MapPlanetsProps): PlanetsUI {
   return {
-    qtdItens: planets.count,
+    total: planets.count || 0,
     nextPage: planets.next || '',
     previousPage: planets.previous || '',
     planets: planets.results.map((planet, index) => {

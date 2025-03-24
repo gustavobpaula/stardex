@@ -14,6 +14,7 @@ import { Characters as CharactersUI } from '@/models'
  */
 export function mapCharacters(peopleAPI: PeopleAPI, planetsAPI: PlanetAPI[]): CharactersUI {
   return {
+    total: peopleAPI.count || 0,
     nextPage: peopleAPI.next || '',
     previousPage: peopleAPI.previous || '',
     characters: peopleAPI.results.map((apiCharacter, index) => {

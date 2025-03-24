@@ -20,7 +20,7 @@ type DoGetCharactersProps = {
  * @returns {Promise<CharactersUI>} A promise that resolves to the mapped character data.
  * @throws {Error} Throws an error if the fetch operation fails.
  */
-export async function doGetCharacters(params: DoGetCharactersProps): Promise<CharactersUI> {
+export async function doGetCharacters(params?: DoGetCharactersProps): Promise<CharactersUI> {
   const res = await request<PeopleAPI>({
     url: `https://swapi.dev/api/people`,
     query: params,
