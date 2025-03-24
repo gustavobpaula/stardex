@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { useDebounce } from '@/hooks'
 
@@ -22,6 +22,8 @@ export type SearchProps = {
 export const Search = ({ onChange, className, debounceTime = 500 }: SearchProps) => {
   const [searchValue, setSearchValue] = useState('')
   const debouncedSearchValue = useDebounce(searchValue, debounceTime)
+  const onChangeRef = useRef(onChange)
+  const debounceSearchValueRef = useRef(debouncedSearchValue)
 
   /**
    * Handles input change event.
@@ -33,8 +35,15 @@ export const Search = ({ onChange, className, debounceTime = 500 }: SearchProps)
   }
 
   useEffect(() => {
-    onChange(debouncedSearchValue)
-  }, [debouncedSearchValue, onChange])
+    onChangeRef.current = onChange
+  }, [onChange])
+
+  useEffect(() => {
+    if (debounceSearchValueRef.current !== debouncedSearchValue) {
+      onChangeRef.current(debouncedSearchValue)
+      debounceSearchValueRef.current = debouncedSearchValue
+    }
+  }, [debouncedSearchValue])
 
   return (
     <Input
@@ -42,6 +51,7 @@ export const Search = ({ onChange, className, debounceTime = 500 }: SearchProps)
       value={searchValue}
       onChange={handleInputChange}
       className={className}
+      aria-label="Search"
     />
   )
 }
