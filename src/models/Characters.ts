@@ -21,5 +21,5 @@ export interface Character {
 export interface Characters {
   nextPage: string
   previousPage: string
-  characters: Array<Pick<Character, 'name' | 'height' | 'birthYear' | 'homeworld'>>
+  characters: Array<Pick<Character, 'name' | 'height' | 'birthYear' | 'homeworld' | 'url'>>
 }

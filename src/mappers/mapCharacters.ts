@@ -27,6 +27,7 @@ export function mapCharacters(peopleAPI: PeopleAPI, planetsAPI: PlanetAPI[]): Ch
         birthYear: apiCharacter.birth_year || 'Unknown',
         height: apiCharacter.height || 'Unknown',
         homeworld,
+        url: apiCharacter.url || '',
       }
     }),
   }

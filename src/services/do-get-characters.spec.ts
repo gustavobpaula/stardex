@@ -71,6 +71,7 @@ describe('doGetCharacters', () => {
             name: 'Tatooine',
             url: 'https://swapi.dev/api/planets/1/',
           },
+          url: 'https://swapi.dev/api/people/1/',
         },
       ],
     })
@@ -100,6 +101,7 @@ describe('doGetCharacters', () => {
             name: 'Tatooine',
             url: 'https://swapi.dev/api/planets/1/',
           },
+          url: 'https://swapi.dev/api/people/1/',
         },
       ],
     })
