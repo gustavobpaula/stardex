@@ -1,6 +1,6 @@
 'use client'
 
-import { CardLoading, CardCharacter, Pagination } from '@/components'
+import { CardLoading, CardCharacter, Pagination, Search } from '@/components'
 import { useCharactersStore } from '@/store'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -12,25 +12,37 @@ export default function Characters() {
   const nextPage = useCharactersStore((state) => state.nextPage)
   const previousPage = useCharactersStore((state) => state.previousPage)
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchValue, setSearchValue] = useState('')
 
   const handleNextPage = () => {
     if (nextPage) {
-      loadCharacters({ page: nextPage })
+      loadCharacters(searchValue ? { search: searchValue, page: nextPage } : { page: nextPage })
       setCurrentPage(nextPage)
     }
   }
 
   const handlePreviousPage = () => {
     if (previousPage) {
-      loadCharacters({ page: previousPage })
+      loadCharacters(
+        searchValue ? { search: searchValue, page: previousPage } : { page: previousPage },
+      )
       setCurrentPage(previousPage)
     }
   }
 
   const handlePage = (page: number) => {
-    loadCharacters({ page })
+    loadCharacters(searchValue ? { search: searchValue, page } : { page })
     setCurrentPage(page)
   }
+
+  const handleSearch = useCallback(
+    (value: string) => {
+      loadCharacters({ search: value })
+      setCurrentPage(1)
+      setSearchValue(value)
+    },
+    [loadCharacters],
+  )
 
   const content = useCallback(() => {
     if (isLoading) {
@@ -42,19 +54,16 @@ export default function Characters() {
   }, [characters, isLoading])
 
   useEffect(() => {
-    console.log('nextPage', nextPage)
-  }, [nextPage])
-
-  useEffect(() => {
     loadCharacters()
   }, [loadCharacters])
 
   return (
-    <>
-      <main className="grid grid-cols-1 gap-4 p-4 align-middle sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
+    <div className="flex flex-col p-4">
+      <Search onChange={handleSearch} className="max-w-xs self-end" debounceTime={1000} />
+      <main className="grid grid-cols-1 gap-4 py-4 align-middle sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
         {content()}
       </main>
-      <nav className="flex justify-center p-4">
+      <nav className="flex justify-center py-4">
         <Pagination
           onNextPage={handleNextPage}
           onPreviousPage={handlePreviousPage}
@@ -63,6 +72,6 @@ export default function Characters() {
           currentPage={currentPage}
         />
       </nav>
-    </>
+    </div>
   )
 }
