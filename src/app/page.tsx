@@ -2,11 +2,9 @@
 
 import { CardLoading, CardCharacter, Pagination } from '@/components'
 import { useCharactersStore } from '@/store'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export default function Characters() {
-  const array = new Array(10).fill(0)
-
   const loadCharacters = useCharactersStore((state) => state.loadCharacters)
   const isLoading = useCharactersStore((state) => state.isLoading)
   const characters = useCharactersStore((state) => state.characters)
@@ -34,6 +32,15 @@ export default function Characters() {
     setCurrentPage(page)
   }
 
+  const content = useCallback(() => {
+    if (isLoading) {
+      const array = new Array(10).fill(0)
+      return array.map((_, index) => <CardLoading key={index} />)
+    }
+
+    return characters.map((props, index) => <CardCharacter key={index} {...props} />)
+  }, [characters, isLoading])
+
   useEffect(() => {
     console.log('nextPage', nextPage)
   }, [nextPage])
@@ -42,22 +49,10 @@ export default function Characters() {
     loadCharacters()
   }, [loadCharacters])
 
-  if (isLoading) {
-    return (
-      <main className="grid grid-cols-1 gap-4 p-4 align-middle sm:grid-cols-2 lg:grid-cols-4">
-        {array.map((_, index) => (
-          <CardLoading key={index} />
-        ))}
-      </main>
-    )
-  }
-
   return (
     <>
-      <main className="grid grid-cols-1 gap-4 p-4 align-middle sm:grid-cols-2 lg:grid-cols-4">
-        {characters.map((props, index) => (
-          <CardCharacter key={index} {...props} />
-        ))}
+      <main className="grid grid-cols-1 gap-4 p-4 align-middle sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
+        {content()}
       </main>
       <nav className="flex justify-center p-4">
         <Pagination
