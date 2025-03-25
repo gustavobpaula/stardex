@@ -2,19 +2,32 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { Star } from 'lucide-react'
-import { Character } from '@/models'
+import { Star, StarOff } from 'lucide-react'
+import { CharactersListItem } from '@/models'
 import { extractId } from '@/utils'
+import { useFavoritesStore } from '@/store'
+import { useCallback } from 'react'
 
-export type CardCharacterProps = Pick<
-  Character,
-  'name' | 'height' | 'birthYear' | 'homeworld' | 'url'
->
+export type CardCharacterProps = CharactersListItem
 
 export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardCharacterProps) => {
   const homeworldRoute = `/planets/${extractId(homeworld.url)}`
   const characterId = extractId(url)
   const characterRoute = `/characters/${characterId}`
+  const addCharacterFavorite = useFavoritesStore((state) => state.addCharacterFavorite)
+  const removeFavorite = useFavoritesStore((state) => state.removeFavorite)
+  const isFavorite = useFavoritesStore((state) =>
+    state.favorites.characters.some((character) => character.url === url),
+  )
+
+  const onAddFavorite = useCallback(
+    () => addCharacterFavorite({ name, birthYear, height, homeworld, url }),
+    [addCharacterFavorite, birthYear, height, homeworld, name, url],
+  )
+  const onRemoveFavorite = useCallback(
+    () => removeFavorite('characters', url),
+    [removeFavorite, url],
+  )
 
   return (
     <Card
@@ -26,7 +39,33 @@ export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardC
         <CardTitle role="heading" id={`character-${characterId}`}>
           {name}
         </CardTitle>
-        <Star />
+        {isFavorite ? (
+          <StarOff
+            onClick={onRemoveFavorite}
+            className="cursor-pointer"
+            role="button"
+            aria-label={`Remove ${name} from favorites`}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                onRemoveFavorite()
+              }
+            }}
+          />
+        ) : (
+          <Star
+            onClick={onAddFavorite}
+            className="cursor-pointer"
+            role="button"
+            aria-label={`Add ${name} to favorites`}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                onAddFavorite()
+              }
+            }}
+          />
+        )}
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2">

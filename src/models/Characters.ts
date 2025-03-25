@@ -18,9 +18,14 @@ export interface Character {
   url: string
 }
 
+export type CharactersListItem = Pick<
+  Character,
+  'name' | 'height' | 'birthYear' | 'homeworld' | 'url'
+>
+
 export interface Characters {
   total: number
   nextPage: number | null
   previousPage: number | null
-  characters: Array<Pick<Character, 'name' | 'height' | 'birthYear' | 'homeworld' | 'url'>>
+  characters: Array<CharactersListItem>
 }

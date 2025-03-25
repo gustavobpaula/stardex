@@ -12,7 +12,8 @@ export function extractPageFromUrl(url: string): number | null {
   try {
     const parsedUrl = new URL(url)
     const page = parsedUrl.searchParams.get('page')
-    return page ? parseInt(page, 10) : null
+    const parsedPage = page ? parseInt(page, 10) : null
+    return parsedPage || null
   } catch (error) {
     console.error('Invalid URL:', error)
     return null

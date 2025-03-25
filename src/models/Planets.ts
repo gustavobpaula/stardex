@@ -13,11 +13,14 @@ export interface Planet {
   url: string
 }
 
+export type PlanetsListItem = Pick<
+  Planet,
+  'name' | 'orbitalPeriod' | 'rotationPeriod' | 'climate' | 'residents' | 'url'
+>
+
 export interface Planets {
   total: number
   nextPage: string
   previousPage: string
-  planets: Array<
-    Pick<Planet, 'name' | 'orbitalPeriod' | 'rotationPeriod' | 'climate' | 'residents'>
-  >
+  planets: Array<PlanetsListItem>
 }

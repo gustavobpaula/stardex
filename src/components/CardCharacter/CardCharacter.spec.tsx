@@ -1,6 +1,7 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { CardCharacter, CardCharacterProps } from './CardCharacter'
+import { useFavoritesStore } from '@/store'
 
 const mockCharacter: CardCharacterProps = {
   name: 'Luke Skywalker',
@@ -13,7 +14,21 @@ const mockCharacter: CardCharacterProps = {
   url: 'https://swapi.dev/api/people/1/',
 }
 
+jest.mock('@/store', () => ({
+  useFavoritesStore: jest.fn(),
+}))
+
 describe('CardCharacter', () => {
+  beforeEach(() => {
+    ;(useFavoritesStore as unknown as jest.Mock).mockReturnValue({
+      addCharacterFavorite: jest.fn(),
+      removeFavorite: jest.fn(),
+      favorites: {
+        characters: [],
+      },
+    })
+  })
+
   it('should render the character card with correct information', () => {
     render(<CardCharacter {...mockCharacter} />)
 
