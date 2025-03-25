@@ -1,6 +1,6 @@
 'use client'
 
-import { CardLoading, CardPlanet, Pagination, Search } from '@/components'
+import { CardLoading, CardPlanet, Empty, Pagination, Search } from '@/components'
 import { usePlanetsStore } from '@/store'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -60,18 +60,24 @@ export default function Planets() {
   return (
     <div className="flex flex-col p-4">
       <Search onChange={handleSearch} className="max-w-xs self-end" debounceTime={1000} />
-      <main className="grid grid-cols-1 gap-4 py-4 align-middle sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
-        {content()}
-      </main>
-      <nav className="flex justify-center py-4">
-        <Pagination
-          onNextPage={handleNextPage}
-          onPreviousPage={handlePreviousPage}
-          onPage={handlePage}
-          total={total}
-          currentPage={currentPage}
-        />
-      </nav>
+      {planets.length === 0 && !isLoading ? (
+        <Empty />
+      ) : (
+        <>
+          <main className="grid grid-cols-1 gap-4 py-4 align-middle sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
+            {content()}
+          </main>
+          <nav className="flex justify-center py-4">
+            <Pagination
+              onNextPage={handleNextPage}
+              onPreviousPage={handlePreviousPage}
+              onPage={handlePage}
+              total={total}
+              currentPage={currentPage}
+            />
+          </nav>
+        </>
+      )}
     </div>
   )
 }

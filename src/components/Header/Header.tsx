@@ -11,12 +11,12 @@ export const Header = () => {
 
   return (
     <header className="bg-background flex items-center justify-between px-6 py-4 shadow-md">
-      <Link href="/">
-        <Image src="/logo.png" alt="Star Dex" width={195} height={122} layout="responsive" />
+      <Link href="/" className="mr-3">
+        <Image src="/logo.png" alt="Star Dex" width={195} height={122} />
       </Link>
 
       <nav className="flex grow-1 justify-center">
-        <ul className="flex gap-6 text-lg">
+        <ul className="text-md flex gap-6 md:text-lg">
           <li>
             <Link href="/" className={pathname === '/' ? activeClass : ''}>
               Characters
