@@ -31,7 +31,7 @@ export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardC
 
   return (
     <Card
-      className="w-full max-w-xs justify-self-center"
+      className="w-full max-w-xs justify-between justify-self-center"
       role="region"
       aria-labelledby={`character-${characterId}`}
     >
@@ -70,11 +70,11 @@ export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardC
       <CardContent>
         <div className="grid grid-cols-2">
           <p>Height</p>
-          <strong className="justify-self-end">{height}</strong>
+          <strong className="justify-self-end text-right">{height}</strong>
           <p>Birthyear</p>
-          <strong className="justify-self-end">{birthYear}</strong>
+          <strong className="justify-self-end text-right">{birthYear}</strong>
           <p>Homeworld</p>
-          <strong className="justify-self-end">
+          <strong className="justify-self-end text-right">
             <Link href={homeworldRoute} aria-label={`Homeworld: ${homeworld.name}`}>
               {homeworld.name}
             </Link>

@@ -20,7 +20,7 @@ export type PlanetsListItem = Pick<
 
 export interface Planets {
   total: number
-  nextPage: string
-  previousPage: string
+  nextPage: number | null
+  previousPage: number | null
   planets: Array<PlanetsListItem>
 }

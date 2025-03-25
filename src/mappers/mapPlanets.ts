@@ -1,5 +1,6 @@
 import { Planets as PlanetsAPI, Person as PersonAPI } from '@/entities'
 import { Planets as PlanetsUI } from '@/models'
+import { extractPageFromUrl } from '@/utils'
 
 type MapPlanetsProps = {
   planets: PlanetsAPI
@@ -23,8 +24,8 @@ type MapPlanetsProps = {
 export function mapPlanets({ planets, externalInfos }: MapPlanetsProps): PlanetsUI {
   return {
     total: planets.count || 0,
-    nextPage: planets.next || '',
-    previousPage: planets.previous || '',
+    nextPage: planets.next ? extractPageFromUrl(planets.next) : null,
+    previousPage: planets.previous ? extractPageFromUrl(planets.previous) : null,
     planets: planets.results.map((planet, index) => {
       const residents =
         externalInfos[index]?.residents.map((resident) => ({
@@ -38,6 +39,7 @@ export function mapPlanets({ planets, externalInfos }: MapPlanetsProps): Planets
         rotationPeriod: planet.rotation_period || 'Unknown',
         climate: planet.climate || 'Unknown',
         residents: residents,
+        url: planet.url || '',
       }
     }),
   }
