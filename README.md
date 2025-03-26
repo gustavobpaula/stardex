@@ -43,7 +43,7 @@ To install and run the application locally, follow these steps:
 3. Install the dependencies:
 
    ```bash
-   # if you not have pnpm run
+   # if you not have pnpm run the command
    npx install pnpm -g
    ```
 
