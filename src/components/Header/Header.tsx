@@ -15,7 +15,7 @@ export const Header = () => {
         <Image src="/logo.png" alt="Star Dex" width={195} height={122} />
       </Link>
 
-      <nav className="flex grow-1 justify-center">
+      <nav className="justify-right flex">
         <ul className="text-md flex gap-6 md:text-lg">
           <li>
             <Link href="/" className={pathname === '/' ? activeClass : ''}>

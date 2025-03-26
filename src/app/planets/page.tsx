@@ -67,7 +67,7 @@ export default function Planets() {
         <Empty />
       ) : (
         <>
-          <main className="grid grid-cols-1 gap-4 py-4 align-middle sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
+          <main className="grid grid-cols-1 gap-4 py-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-5">
             {content()}
           </main>
           <nav className="flex justify-center py-4">
