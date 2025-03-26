@@ -13,7 +13,7 @@ import {
   Palette,
   Scale,
 } from 'lucide-react'
-import { extractId } from '@/utils'
+import { extractId, formatList } from '@/utils'
 import { CardDetail, CardDetailProps } from '@/components/CardDetail'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import { Separator } from '@/components/ui/separator'
@@ -24,10 +24,6 @@ export default async function Character({ params }: { params: Promise<{ id: stri
   const character = await Promise.resolve()
     .then(() => loadCharacter({ id }))
     .then(() => useCharacterStore.getState().character)
-
-  const getLists = (list: string[]) => {
-    return list.length > 0 ? list.join(', ') : 'Unknown'
-  }
 
   const homeworldRoute = `/planets/${extractId(character.homeworld.url)}`
 
@@ -76,17 +72,17 @@ export default async function Character({ params }: { params: Promise<{ id: stri
     },
     {
       title: 'Films',
-      value: getLists(character.films),
+      value: formatList(character.films),
       Icon: Film,
     },
     {
       title: 'Starships',
-      value: getLists(character.starships),
+      value: formatList(character.starships),
       Icon: Rocket,
     },
     {
       title: 'Vehicles',
-      value: getLists(character.vehicles),
+      value: formatList(character.vehicles),
       Icon: CarFront,
     },
   ]

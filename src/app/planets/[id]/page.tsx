@@ -1,6 +1,5 @@
 import { usePlanetStore } from '@/store'
 import { InitializerPlanetStore } from './InitializerPlanetStore'
-import Link from 'next/link'
 import {
   CalendarRange,
   Clock,
@@ -12,9 +11,8 @@ import {
   Users,
   Weight,
 } from 'lucide-react'
-import { extractId } from '@/utils'
+import { formatListWithLinks } from '@/utils'
 import { CardDetail, CardDetailProps } from '@/components/CardDetail'
-import { Planet as PlanetUI } from '@/models'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import { Separator } from '@/components/ui/separator'
 
@@ -24,26 +22,6 @@ export default async function Planet({ params }: { params: Promise<{ id: string 
   const planet = await Promise.resolve()
     .then(() => loadPlanet({ id }))
     .then(() => usePlanetStore.getState().planet)
-
-  const getResidents = (residents: PlanetUI['residents']) => {
-    if (residents.length === 0) {
-      return 'Unknown'
-    }
-    return residents.map((resident, index) => {
-      const residentId = extractId(resident.url)
-      return (
-        <span key={residentId}>
-          <Link
-            className="text-red-400 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
-            href={`/characters/${residentId}`}
-          >
-            {resident.name}
-          </Link>
-          {index < residents.length - 1 && ', '}
-        </span>
-      )
-    })
-  }
 
   const contentCardDetail: CardDetailProps['content'] = [
     {
@@ -73,7 +51,7 @@ export default async function Planet({ params }: { params: Promise<{ id: string 
     },
     {
       title: 'Residents',
-      value: getResidents(planet.residents),
+      value: formatListWithLinks({ list: planet.residents, baseRoute: '/characters' }),
       Icon: User,
     },
     {
