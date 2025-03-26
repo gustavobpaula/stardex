@@ -78,7 +78,7 @@ export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardC
             <Link
               href={homeworldRoute}
               aria-label={`Homeworld: ${homeworld.name}`}
-              className="text-red-400 underline-offset-4 hover:underline"
+              className="text-red-400 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
             >
               {homeworld.name}
             </Link>

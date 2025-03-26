@@ -32,7 +32,7 @@ export default async function Planet({ params }: { params: Promise<{ id: string 
       return (
         <span key={residentId}>
           <Link
-            className="text-red-400 underline-offset-4 hover:underline"
+            className="text-red-400 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
             href={`/characters/${residentId}`}
           >
             {resident.name}

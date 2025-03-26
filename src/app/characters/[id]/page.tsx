@@ -63,7 +63,10 @@ export default async function Character({ params }: { params: Promise<{ id: stri
     {
       title: 'Homeworld',
       value: (
-        <Link className="text-red-400 underline-offset-4 hover:underline" href={homeworldRoute}>
+        <Link
+          className="text-red-400 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
+          href={homeworldRoute}
+        >
           {character.homeworld.name}
         </Link>
       ),

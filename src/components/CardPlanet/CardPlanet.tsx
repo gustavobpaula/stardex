@@ -89,6 +89,7 @@ export const CardPlanet = ({
                     <Link
                       href={`/${extractId(resident.url)}`}
                       aria-label={`Resident: ${resident.name}`}
+                      className="text-red-400 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
                     >
                       {resident.name}
                     </Link>

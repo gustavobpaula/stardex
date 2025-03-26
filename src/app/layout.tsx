@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header } from '@/components/Header/Header'
+import { Footer } from '@/components/Footer/Footer'
 
 export const metadata: Metadata = {
   title: 'StarDex - Explore the Star Wars Universe',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className={`dark antialiased`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
