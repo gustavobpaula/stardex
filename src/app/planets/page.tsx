@@ -46,9 +46,8 @@ export default function Planets() {
   )
 
   const content = useCallback(() => {
-    if (isLoading) {
-      const array = new Array(10).fill(0)
-      return array.map((_, index) => <CardLoading key={index} />)
+    if (planets === undefined || isLoading) {
+      return new Array(10).fill(0).map((_, index) => <CardLoading key={index} />)
     }
 
     return planets.map((props, index) => <CardPlanet key={index} {...props} />)
@@ -60,10 +59,10 @@ export default function Planets() {
 
   return (
     <div className="flex flex-col p-4">
-      <Breadcrumb items={[{ label: 'Home' }, { label: 'Planets' }]} />
+      <Breadcrumb items={[{ label: 'Home', url: '/' }, { label: 'Planets' }]} />
       <Separator className="my-4" />
       <Search onChange={handleSearch} className="self-end md:max-w-xs" debounceTime={1000} />
-      {planets.length === 0 && !isLoading ? (
+      {planets && planets.length === 0 ? (
         <Empty />
       ) : (
         <>

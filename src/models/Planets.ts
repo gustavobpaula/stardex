@@ -22,5 +22,5 @@ export interface Planets {
   total: number
   nextPage: number | null
   previousPage: number | null
-  planets: Array<PlanetsListItem>
+  planets: Array<PlanetsListItem> | undefined
 }

@@ -27,5 +27,5 @@ export interface Characters {
   total: number
   nextPage: number | null
   previousPage: number | null
-  characters: Array<CharactersListItem>
+  characters: Array<CharactersListItem> | undefined
 }

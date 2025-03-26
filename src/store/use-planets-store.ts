@@ -13,7 +13,7 @@ export const usePlanetsStore = create<PlanetsStore>()(
     (set) => ({
       isLoading: false,
       total: 0,
-      planets: [],
+      planets: undefined,
       nextPage: null,
       previousPage: null,
       loadPlanets: (params) => {

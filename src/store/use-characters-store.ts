@@ -13,7 +13,7 @@ export const useCharactersStore = create<CharactersStore>()(
     (set) => ({
       isLoading: false,
       total: 0,
-      characters: [],
+      characters: undefined,
       nextPage: null,
       previousPage: null,
       loadCharacters: (params) => {

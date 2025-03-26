@@ -46,9 +46,8 @@ export default function Characters() {
   )
 
   const content = useCallback(() => {
-    if (isLoading) {
-      const array = new Array(10).fill(0)
-      return array.map((_, index) => <CardLoading key={index} />)
+    if (characters === undefined || isLoading) {
+      return Array.from({ length: 10 }, (_, index) => <CardLoading key={index} />)
     }
 
     return characters.map((props, index) => <CardCharacter key={index} {...props} />)
@@ -63,7 +62,7 @@ export default function Characters() {
       <Breadcrumb items={[{ label: 'Home' }, { label: 'Characters' }]} />
       <Separator className="my-4" />
       <Search onChange={handleSearch} className="self-end md:max-w-xs" debounceTime={1000} />
-      {characters.length === 0 && !isLoading ? (
+      {characters && characters.length === 0 ? (
         <Empty />
       ) : (
         <>
