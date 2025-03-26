@@ -6,7 +6,7 @@ import { devtools } from 'zustand/middleware'
 export type CharactersStore = {
   isLoading: boolean
   character: Character
-  loadCharacter: ({ url }: { url: string }) => Promise<void>
+  loadCharacter: ({ id }: { id: string | number }) => Promise<void>
 }
 
 export const useCharacterStore = create<CharactersStore>()(
@@ -32,10 +32,10 @@ export const useCharacterStore = create<CharactersStore>()(
         vehicles: [],
         url: '',
       },
-      loadCharacter: ({ url }) => {
+      loadCharacter: ({ id }) => {
         set({ isLoading: true })
         return Promise.resolve()
-          .then(() => doGetCharacter({ url }))
+          .then(() => doGetCharacter({ url: `https://swapi.dev/api/people/${id}` }))
           .then((character) => set({ character }))
           .finally(() => set({ isLoading: false }))
       },

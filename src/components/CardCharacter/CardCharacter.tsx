@@ -36,7 +36,7 @@ export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardC
       aria-labelledby={`character-${characterId}`}
     >
       <CardHeader className="flex justify-between">
-        <CardTitle role="heading" id={`character-${characterId}`}>
+        <CardTitle role="heading" id={`character-${characterId}`} className="text-blue-400">
           {name}
         </CardTitle>
         {isFavorite ? (
@@ -75,7 +75,11 @@ export const CardCharacter = ({ name, birthYear, height, homeworld, url }: CardC
           <strong className="justify-self-end text-right">{birthYear}</strong>
           <p>Homeworld</p>
           <strong className="justify-self-end text-right">
-            <Link href={homeworldRoute} aria-label={`Homeworld: ${homeworld.name}`}>
+            <Link
+              href={homeworldRoute}
+              aria-label={`Homeworld: ${homeworld.name}`}
+              className="text-red-400 underline-offset-4 hover:underline"
+            >
               {homeworld.name}
             </Link>
           </strong>

@@ -39,7 +39,7 @@ export const CardPlanet = ({
       aria-labelledby={`planet-${planetId}`}
     >
       <CardHeader className="flex justify-between">
-        <CardTitle role="heading" id={`planet-${planetId}`}>
+        <CardTitle role="heading" id={`planet-${planetId}`} className="text-blue-400">
           {name}
         </CardTitle>
         {isFavorite ? (
