@@ -15,6 +15,8 @@ import {
 } from 'lucide-react'
 import { extractId } from '@/utils'
 import { CardDetail, CardDetailProps } from '@/components/CardDetail'
+import { Breadcrumb } from '@/components/Breadcrumb'
+import { Separator } from '@/components/ui/separator'
 
 export default async function Character({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -90,8 +92,16 @@ export default async function Character({ params }: { params: Promise<{ id: stri
   ]
 
   return (
-    <>
+    <div className="p-4">
       <InitializerCharacterStore character={character} />
+      <Breadcrumb
+        items={[
+          { label: 'Home', url: '/' },
+          { label: 'Characters', url: '/' },
+          { label: character.name },
+        ]}
+      />
+      <Separator className="my-4" />
       <main>
         <article className="mx-auto max-w-3xl p-4">
           <CardDetail
@@ -101,6 +111,6 @@ export default async function Character({ params }: { params: Promise<{ id: stri
           />
         </article>
       </main>
-    </>
+    </div>
   )
 }

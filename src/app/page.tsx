@@ -1,8 +1,9 @@
 'use client'
 
-import { CardLoading, CardCharacter, Pagination, Search, Empty } from '@/components'
+import { CardLoading, CardCharacter, Pagination, Search, Empty, Breadcrumb } from '@/components'
 import { useCharactersStore } from '@/store'
 import { useCallback, useEffect, useState } from 'react'
+import { Separator } from '@/components/ui/separator'
 
 export default function Characters() {
   const loadCharacters = useCharactersStore((state) => state.loadCharacters)
@@ -59,7 +60,9 @@ export default function Characters() {
 
   return (
     <div className="flex flex-col p-4">
-      <Search onChange={handleSearch} className="max-w-xs self-end" debounceTime={1000} />
+      <Breadcrumb items={[{ label: 'Home' }, { label: 'Characters' }]} />
+      <Separator className="my-4" />
+      <Search onChange={handleSearch} className="self-end md:max-w-xs" debounceTime={1000} />
       {characters.length === 0 && !isLoading ? (
         <Empty />
       ) : (

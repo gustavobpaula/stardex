@@ -1,8 +1,9 @@
 'use client'
 
-import { CardLoading, CardPlanet, Empty, Pagination, Search } from '@/components'
+import { Breadcrumb, CardLoading, CardPlanet, Empty, Pagination, Search } from '@/components'
 import { usePlanetsStore } from '@/store'
 import { useCallback, useEffect, useState } from 'react'
+import { Separator } from '@/components/ui/separator'
 
 export default function Planets() {
   const loadPlanets = usePlanetsStore((state) => state.loadPlanets)
@@ -59,7 +60,9 @@ export default function Planets() {
 
   return (
     <div className="flex flex-col p-4">
-      <Search onChange={handleSearch} className="max-w-xs self-end" debounceTime={1000} />
+      <Breadcrumb items={[{ label: 'Home' }, { label: 'Planets' }]} />
+      <Separator className="my-4" />
+      <Search onChange={handleSearch} className="self-end md:max-w-xs" debounceTime={1000} />
       {planets.length === 0 && !isLoading ? (
         <Empty />
       ) : (

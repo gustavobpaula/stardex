@@ -10,7 +10,7 @@ export const Header = () => {
   const activeClass = 'font-black underline underline-offset-8'
 
   return (
-    <header className="bg-background flex items-center justify-between px-6 py-4 shadow-md">
+    <header className="flex items-center justify-between bg-neutral-900 px-6 py-6 text-gray-400 shadow-md">
       <Link href="/" className="mr-3">
         <Image src="/logo.png" alt="Star Dex" width={195} height={122} />
       </Link>

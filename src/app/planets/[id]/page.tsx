@@ -15,6 +15,8 @@ import {
 import { extractId } from '@/utils'
 import { CardDetail, CardDetailProps } from '@/components/CardDetail'
 import { Planet as PlanetUI } from '@/models'
+import { Breadcrumb } from '@/components/Breadcrumb'
+import { Separator } from '@/components/ui/separator'
 
 export default async function Planet({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -92,8 +94,16 @@ export default async function Planet({ params }: { params: Promise<{ id: string 
   ]
 
   return (
-    <>
+    <div className="p-4">
       <InitializerPlanetStore planet={planet} />
+      <Breadcrumb
+        items={[
+          { label: 'Home', url: '/' },
+          { label: 'Planets', url: '/planets' },
+          { label: planet.name },
+        ]}
+      />
+      <Separator className="my-4" />
       <main>
         <article className="mx-auto max-w-3xl p-4">
           <CardDetail
@@ -103,6 +113,6 @@ export default async function Planet({ params }: { params: Promise<{ id: string 
           />
         </article>
       </main>
-    </>
+    </div>
   )
 }
