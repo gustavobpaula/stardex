@@ -56,7 +56,8 @@ describe('doGetPlanets', () => {
     ;(request as jest.Mock).mockImplementation(({ url }) => {
       if (url.includes('/planets')) return Promise.resolve(mockPlanetsAPI)
       if (url.includes('/people/1')) return Promise.resolve(mockPersonAPI)
-      if (url.includes('/people/2')) return Promise.resolve(mockPersonAPI)
+      if (url.includes('/people/2'))
+        return Promise.resolve({ ...mockPersonAPI, url: 'https://swapi.dev/api/people/2/' })
 
       return Promise.reject(new Error('Unknown URL'))
     })
@@ -65,8 +66,8 @@ describe('doGetPlanets', () => {
 
     expect(result).toEqual({
       total: 1,
-      nextPage: '',
-      previousPage: '',
+      nextPage: null,
+      previousPage: null,
       planets: [
         {
           name: 'Tatooine',
@@ -80,9 +81,10 @@ describe('doGetPlanets', () => {
             },
             {
               name: 'Luke Skywalker',
-              url: 'https://swapi.dev/api/people/1/',
+              url: 'https://swapi.dev/api/people/2/',
             },
           ],
+          url: 'https://swapi.dev/api/planets/1/',
         },
       ],
     })
@@ -92,10 +94,12 @@ describe('doGetPlanets', () => {
     ;(request as jest.Mock).mockImplementation(({ url }) => {
       if (url.includes('/planets')) return Promise.resolve(mockPlanetsAPI)
       if (url.includes('/people/1')) return Promise.resolve(mockPersonAPI)
-      if (url.includes('/people/2')) return Promise.resolve(mockPersonAPI)
+      if (url.includes('/people/2'))
+        return Promise.resolve({ ...mockPersonAPI, url: 'https://swapi.dev/api/people/2/' })
 
       return Promise.reject(new Error('Unknown URL'))
     })
+
     const result = await doGetPlanets({ page: 1, search: 'Tatooine' })
 
     expect(request).toHaveBeenCalledWith({
@@ -105,8 +109,8 @@ describe('doGetPlanets', () => {
 
     expect(result).toEqual({
       total: 1,
-      nextPage: '',
-      previousPage: '',
+      nextPage: null,
+      previousPage: null,
       planets: [
         {
           name: 'Tatooine',
@@ -120,9 +124,10 @@ describe('doGetPlanets', () => {
             },
             {
               name: 'Luke Skywalker',
-              url: 'https://swapi.dev/api/people/1/',
+              url: 'https://swapi.dev/api/people/2/',
             },
           ],
+          url: 'https://swapi.dev/api/planets/1/',
         },
       ],
     })
