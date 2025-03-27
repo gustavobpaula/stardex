@@ -32,30 +32,30 @@ describe('CardCharacter', () => {
   it('should render the character card with correct information', () => {
     render(<CardCharacter {...mockCharacter} />)
 
-    // Verifica se o título do personagem está presente
+    // Check if the character title is present
     const title = screen.getByRole('heading', { name: /luke skywalker/i })
     expect(title).toBeInTheDocument()
 
-    // Verifica se a altura do personagem está presente
+    // Check if the character height is present
     const height = screen.getByText(/height/i)
     expect(height).toBeInTheDocument()
     const heightValue = screen.getByText(/172/i)
     expect(heightValue).toBeInTheDocument()
 
-    // Verifica se o ano de nascimento do personagem está presente
+    // Check if the character birth year is present
     const birthYear = screen.getByText(/birthyear/i)
     expect(birthYear).toBeInTheDocument()
     const birthYearValue = screen.getByText(/19bby/i)
     expect(birthYearValue).toBeInTheDocument()
 
-    // Verifica se o planeta natal do personagem está presente
+    // Check if the character's homeworld is present
     const homeworld = screen.getByText(/homeworld/i)
     expect(homeworld).toBeInTheDocument()
     const homeworldLink = screen.getByRole('link', { name: /homeworld: tatooine/i })
     expect(homeworldLink).toBeInTheDocument()
     expect(homeworldLink).toHaveAttribute('href', '/planets/1')
 
-    // Verifica se o botão "load more" está presente
+    // Check if the "load more" button is present
     const loadMoreButton = screen.getByRole('link', { name: /load more about luke skywalker/i })
     expect(loadMoreButton).toBeInTheDocument()
     expect(loadMoreButton).toHaveAttribute('href', '/characters/1')
@@ -64,7 +64,7 @@ describe('CardCharacter', () => {
   it('should have accessible roles and labels', () => {
     render(<CardCharacter {...mockCharacter} />)
 
-    // Verifica se o card tem o papel de região e está associado ao título
+    // Check if the card has the role of region and is associated with the title
     const card = screen.getByRole('region', { name: /luke skywalker/i })
     expect(card).toBeInTheDocument()
     expect(card).toHaveAttribute(
