@@ -1,5 +1,5 @@
 export * from './buildQueryString'
 export * from './extractId'
 export * from './extractPageFromUrl'
-export * from './formatListWithLinks'
 export * from './formatList'
+export * from './formatListWithLinks'
