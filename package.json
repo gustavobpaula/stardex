@@ -66,6 +66,7 @@
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "storybook": "^8.6.10",
+    "storybook-tailwind-dark-mode": "^1.0.22",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5",

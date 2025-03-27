@@ -8,6 +8,7 @@ StarDex is a web application that allows you to explore the Star Wars universe, 
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Storybook](#storybook)
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
 - [Live Demo](#live-demo)
@@ -64,6 +65,34 @@ To install and run the application locally, follow these steps:
 
 After starting the development server, you can navigate through the application to explore characters and planets from the Star Wars universe. Use the navigation bar to access different sections of the application.
 
+## Storybook
+
+The project includes a **Storybook** to visualize and test components in isolation.
+
+### Running Storybook
+
+To start the Storybook server locally, follow these steps:
+
+1. Ensure you have installed all dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+2. Start the Storybook server:
+
+   ```bash
+   pnpm storybook
+   ```
+
+3. Open your browser and go to `http://localhost:6006` to view the Storybook interface.
+
+### Storybook Features
+
+- View and test individual components in isolation.
+- Explore different states and variations of components.
+- Useful for UI development and documentation.
+
 ## Project Structure
 
 The project follows a well-organized structure to maintain scalability and readability. Here is an overview of the main directories and their purposes:
@@ -103,6 +132,7 @@ The project follows a well-organized structure to maintain scalability and reada
 - [SWAPI](https://swapi.dev/)
 - [Zustand](https://zustand.surge.sh/)
 - [Shadcn/ui](https://ui.shadcn.com/)
+- [Storybook](https://storybook.js.org/)
 
 ## Live Demo
 
