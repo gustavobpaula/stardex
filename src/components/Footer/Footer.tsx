@@ -13,6 +13,8 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-white"
+            data-testid="github-icon"
+            aria-label="GitHub"
           >
             <FaGithub size={20} />
           </a>
@@ -21,6 +23,8 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-white"
+            data-testid="linkedin-icon"
+            aria-label="LinkedIn"
           >
             <FaLinkedin size={20} />
           </a>
@@ -29,6 +33,8 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-white"
+            data-testid="instagram-icon"
+            aria-label="Instagram"
           >
             <FaInstagram size={20} />
           </a>

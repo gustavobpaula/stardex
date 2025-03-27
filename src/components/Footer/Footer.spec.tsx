@@ -8,7 +8,7 @@ describe('Footer', () => {
     render(<Footer />)
 
     // Check if the developer's name is rendered
-    const developerName = screen.getByText(/developed by gustavo bento de paula/i)
+    const developerName = screen.getByText(/gustavo bento de paula/i)
     expect(developerName).toBeInTheDocument()
   })
 

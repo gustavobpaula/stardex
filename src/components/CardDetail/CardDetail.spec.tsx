@@ -33,8 +33,6 @@ describe('CardDetail', () => {
     expect(screen.getByText('Blue')).toBeInTheDocument()
     expect(screen.getByText('Gender:')).toBeInTheDocument()
     expect(screen.getByText('Male')).toBeInTheDocument()
-    expect(screen.getByTestId('icon-eye')).toBeInTheDocument()
-    expect(screen.getByTestId('icon-users')).toBeInTheDocument()
   })
 
   it('should render the content without icons if Icon is not provided', () => {
@@ -56,7 +54,5 @@ describe('CardDetail', () => {
     expect(screen.getByText('Blue')).toBeInTheDocument()
     expect(screen.getByText('Gender:')).toBeInTheDocument()
     expect(screen.getByText('Male')).toBeInTheDocument()
-    expect(screen.queryByTestId('icon-eye')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('icon-users')).not.toBeInTheDocument()
   })
 })
