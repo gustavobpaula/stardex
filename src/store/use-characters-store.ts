@@ -28,6 +28,9 @@ export const useCharactersStore = create<CharactersStore>()(
               total,
             }),
           )
+          .catch((error) => {
+            console.error('Failed to load characters:', error)
+          })
           .finally(() => set({ isLoading: false }))
       },
     }),

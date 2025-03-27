@@ -32,6 +32,9 @@ export const usePlanetStore = create<PlanetsStore>()(
         return Promise.resolve()
           .then(() => doGetPlanet({ url: `https://swapi.dev/api/planet/${id}` }))
           .then((planet) => set({ planet }))
+          .catch((error) => {
+            console.error('Failed to load planet:', error)
+          })
           .finally(() => set({ isLoading: false }))
       },
     }),

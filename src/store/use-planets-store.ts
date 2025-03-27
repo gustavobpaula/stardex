@@ -28,6 +28,9 @@ export const usePlanetsStore = create<PlanetsStore>()(
               total,
             }),
           )
+          .catch((error) => {
+            console.error('Failed to load planets:', error)
+          })
           .finally(() => set({ isLoading: false }))
       },
     }),

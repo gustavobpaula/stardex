@@ -37,6 +37,9 @@ export const useCharacterStore = create<CharactersStore>()(
         return Promise.resolve()
           .then(() => doGetCharacter({ url: `https://swapi.dev/api/people/${id}` }))
           .then((character) => set({ character }))
+          .catch((error) => {
+            console.error('Failed to load character:', error)
+          })
           .finally(() => set({ isLoading: false }))
       },
     }),
